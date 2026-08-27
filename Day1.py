@@ -75,12 +75,118 @@
 # # ll1.display()
 
 
-#doubly linked list
-class DNode:
-    def __init__(self,data):
+# #doubly linked list
+# class DNode:
+#     def __init__(self,data):
+#         self.data=data
+#         self.next=None
+#         self.prev=None
+# class DLinkedList:
+#     def __init__(self):
+#         self.head=None
+#     def add_node(self,data):
+#         node=DNode(data)
+#         if self.head is None:
+#             self.head=node
+#         else:
+#             current=self.head
+#             while current.next is not None:
+#                 current=current.next
+#             current.next=node
+#             node.prev=current
+#     def delete(self,data):
+#         if self.head is None:
+#             print("Not Found")
+#             return
+#         current=self.head
+#         while current is not None:
+#             if current.data==data:
+#                 if current.prev is None:
+#                     self.head=current.next
+#                     if self.head:
+#                         self.head.prev=None
+#                 else:
+#                     current.prev.next=current.next
+#                     if current.next:
+#                         current.next.prev=current.prev
+#                 print("Deleted")
+#                 return
+#             current=current.next
+#         print("Not Found")
+#     def display(self):
+#         current=self.head
+#         while current is not None:
+#             print(current.data,"<->",end=" ")
+#             current=current.next
+#         print("None")
+# dll=DLinkedList()
+# dll.add_node(10)
+# dll.add_node(20)
+# dll.add_node(30)
+# dll.add_node(40)
+# dll.display()
+# dll.delete(30)
+# dll.display()
+
+
+# Circular Linked List
+class CNode:
+    def __init__(self, data):
         self.data=data
         self.next=None
-        self.prev=None
-class DLinkedList:
+class CircularLinkedList:
     def __init__(self):
         self.head=None
+    def add_node(self,data):
+        node=CNode(data)
+        if not self.head:
+            self.head=node
+            node.next=self.head
+        else:
+            current=self.head
+            while current.next!=self.head:
+                current=current.next
+            current.next=node
+            node.next=self.head
+    def delete(self,data):
+        if not self.head:
+            print("Not Found")
+            return
+        if self.head.data==data:
+            if self.head.next==self.head:
+                self.head=None
+            else:
+                current=self.head
+                while current.next!=self.head:
+                    current=current.next
+                self.head=self.head.next
+                current.next=self.head
+            print("Deleted")
+            return
+        current=self.head
+        while current.next!=self.head:
+            if current.next.data==data:
+                current.next=current.next.next
+                print("Deleted")
+                return
+            current=current.next
+        print("Not Found")
+    def display(self):
+        if self.head is None:
+            print("Empty List")
+            return
+        current=self.head
+        while True:
+            print(current.data,"->",end=" ")
+            current=current.next
+            if current==self.head:
+                break
+        print("(Head)")
+cll = CircularLinkedList()
+cll.add_node(10)
+cll.add_node(20)
+cll.add_node(30)
+cll.add_node(40)
+cll.display()
+cll.delete(30)
+cll.display()
