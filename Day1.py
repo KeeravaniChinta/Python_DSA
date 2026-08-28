@@ -129,64 +129,105 @@
 # dll.display()
 
 
-# Circular Linked List
-class CNode:
-    def __init__(self, data):
+# # Circular Linked List
+# class CNode:
+#     def __init__(self, data):
+#         self.data=data
+#         self.next=None
+# class CircularLinkedList:
+#     def __init__(self):
+#         self.head=None
+#     def add_node(self,data):
+#         node=CNode(data)
+#         if not self.head:
+#             self.head=node
+#             node.next=self.head
+#         else:
+#             current=self.head
+#             while current.next!=self.head:
+#                 current=current.next
+#             current.next=node
+#             node.next=self.head
+#     def delete(self,data):
+#         if not self.head:
+#             print("Not Found")
+#             return
+#         if self.head.data==data:
+#             if self.head.next==self.head:
+#                 self.head=None
+#             else:
+#                 current=self.head
+#                 while current.next!=self.head:
+#                     current=current.next
+#                 self.head=self.head.next
+#                 current.next=self.head
+#             print("Deleted")
+#             return
+#         current=self.head
+#         while current.next!=self.head:
+#             if current.next.data==data:
+#                 current.next=current.next.next
+#                 print("Deleted")
+#                 return
+#             current=current.next
+#         print("Not Found")
+#     def display(self):
+#         if self.head is None:
+#             print("Empty List")
+#             return
+#         current=self.head
+#         while True:
+#             print(current.data,"->",end=" ")
+#             current=current.next
+#             if current==self.head:
+#                 break
+#         print("(Head)")
+# cll = CircularLinkedList()
+# cll.add_node(10)
+# cll.add_node(20)
+# cll.add_node(30)
+# cll.add_node(40-)
+# cll.display()
+# cll.delete(30)
+# cll.display()
+
+
+#Trees
+class TreeNode:
+    def ___init__(self,data):
         self.data=data
-        self.next=None
-class CircularLinkedList:
+        self.children=[]
+# tnode1=TreeNode(1)
+# tnode1=TreeNode(2)
+# tnode1.children.append(tnode2)
+# print(tnode1.data)
+# print(tnode1.children[0].data)
+class Tree:
     def __init__(self):
-        self.head=None
-    def add_node(self,data):
-        node=CNode(data)
-        if not self.head:
-            self.head=node
-            node.next=self.head
-        else:
-            current=self.head
-            while current.next!=self.head:
-                current=current.next
-            current.next=node
-            node.next=self.head
-    def delete(self,data):
-        if not self.head:
-            print("Not Found")
+        self.root=None
+    def add_node(self,data,parent_data=None):
+        new_node=TreeNode(data)
+        if not self.root:
+            self.root=new_node
             return
-        if self.head.data==data:
-            if self.head.next==self.head:
-                self.head=None
-            else:
-                current=self.head
-                while current.next!=self.head:
-                    current=current.next
-                self.head=self.head.next
-                current.next=self.head
-            print("Deleted")
-            return
-        current=self.head
-        while current.next!=self.head:
-            if current.next.data==data:
-                current.next=current.next.next
-                print("Deleted")
-                return
-            current=current.next
-        print("Not Found")
-    def display(self):
-        if self.head is None:
-            print("Empty List")
-            return
-        current=self.head
-        while True:
-            print(current.data,"->",end=" ")
-            current=current.next
-            if current==self.head:
-                break
-        print("(Head)")
-cll = CircularLinkedList()
-cll.add_node(10)
-cll.add_node(20)
-cll.add_node(30)
-cll.add_node(40)
-cll.display()
-cll.delete(30)
-cll.display()
+        if parent_data:
+            parent_node=self.findParent(parent_data,self.root)
+        if parent_node:
+            parent_node.children.append(new_node)
+    def findParent(self,data,node):
+        current_node=node
+        if current_node.data==data:
+            return current_node
+        for child in current_node.children:
+            NodeFound=self.findParent(child,data)
+            if NodeFound:
+                return NodeFound
+        return None
+    def display(self,node=None,depth=0):
+        if node is None:
+            node=self.root
+        current_node=node
+        print("-"*depth+str(current_node.data))
+        for child in current_node.children:
+            self.display(child,depth+1)
+    
