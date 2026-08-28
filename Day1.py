@@ -202,32 +202,37 @@ class TreeNode:
 # tnode1.children.append(tnode2)
 # print(tnode1.data)
 # print(tnode1.children[0].data)
-class Tree:
-    def __init__(self):
-        self.root=None
-    def add_node(self,data,parent_data=None):
-        new_node=TreeNode(data)
-        if not self.root:
-            self.root=new_node
-            return
-        if parent_data:
-            parent_node=self.findParent(parent_data,self.root)
-        if parent_node:
-            parent_node.children.append(new_node)
-    def findParent(self,data,node):
-        current_node=node
-        if current_node.data==data:
-            return current_node
-        for child in current_node.children:
-            NodeFound=self.findParent(child,data)
-            if NodeFound:
-                return NodeFound
-        return None
-    def display(self,node=None,depth=0):
-        if node is None:
-            node=self.root
-        current_node=node
-        print("-"*depth+str(current_node.data))
-        for child in current_node.children:
-            self.display(child,depth+1)
-    
+# class Tree:
+#     def __init__(self):
+#         self.root=None
+#     def add_node(self,data,parent_data=None):
+#         new_node=TreeNode(data)
+#         if not self.root:
+#             self.root=new_node
+#             return
+#         if parent_data:
+#             parent_node=self.findParent(parent_data,self.root)
+#         if parent_node:
+#             parent_node.children.append(new_node)
+#     def findParent(self,data,node):
+#         current_node=node
+#         if current_node.data==data:
+#             return current_node
+#         for child in current_node.children:
+#             NodeFound=self.findParent(child,data)
+#             if NodeFound:
+#                 return NodeFound
+#         return None
+#     def display(self,node=None,depth=0):
+#         if node is None:
+#             node=self.root
+#         current_node=node
+#         print("-"*depth+str(current_node.data))
+#         for child in current_node.children:
+#             self.display(child,depth+1) 
+
+
+#Binary Tree
+class BinaryNode:
+
+   
