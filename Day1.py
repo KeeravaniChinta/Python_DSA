@@ -192,11 +192,11 @@
 # cll.display()
 
 
-#Trees
-class TreeNode:
-    def ___init__(self,data):
-        self.data=data
-        self.children=[]
+# #Trees
+# class TreeNode:
+#     def ___init__(self,data):
+#         self.data=data
+#         self.children=[]
 # tnode1=TreeNode(1)
 # tnode1=TreeNode(2)
 # tnode1.children.append(tnode2)
@@ -232,7 +232,90 @@ class TreeNode:
 #             self.display(child,depth+1) 
 
 
-#Binary Tree
-class BinaryNode:
+# #Binary Tree
+# class BinaryNode:
+#     def __init__ (self,data):
+#         self.data=data
+#         self.left=None
+#         self.right=None
+#     def addNode(self,data):
+#         new_node=BinaryNode(data)
+#         if not self.root:
+#             self.root=new_node
+#             return
+#         self.recursiveAdd(new_node,self.root)
+#     def recursiveAdd(self,node,current_node):
+#         if current_node.left is None:
+#             current_node.left=node
+#         elif current_node.right is None:
+#             current_node.right=node
+#         else:
+#             self.recursiveAdd(node,current_node.left)
+#     def display(self,node=None,depth=0):
+#         if node is None:
+#             node=self.root
+#         current_node=node
+#         print("-"*depth+str(current_node.data))
+#         if node.left:
+#             self.display(node.left, depth + 1)
+#         if node.right:
+#             self.display(node.right, depth + 1)
+# tree = BinaryNode()
+# tree.addNode(50)
+# tree.addNode(30)
+# tree.addNode(70)
+# tree.addNode(20)
+# tree.addNode(40)
+# tree.addNode(60)
+# tree.addNode(80)
+# tree.display()
 
-   
+
+
+#Binary search tree(nodes are unique)
+class BinarySearchNode:
+    def __init__(self,data):
+        self.data=data
+        self.left=None
+        self.right=None
+class BinarySearchTree:
+    def __init__(self):
+        self.root=None
+    def addNode(self,data):
+            new_node=BinarySearchNode(data)
+            if not self.root:
+                self.root=new_node
+                return
+            self.recursiveAdd(new_node,self.root)
+    def recursiveAdd(self,node,current_node):
+        if node.data<current_node.data:
+            if current_node.left is None:
+                current_node.left=node
+                return 
+            else:
+                self.recursiveAdd(node,current_node.left)
+        elif node.data>current_node.data:
+            if current_node.right is None:
+                current_node.right=node
+                return 
+            else:
+                self.recursiveAdd(node,current_node.right)
+    def display(self,node=None,depth=0):
+        if node is None:
+            node=self.root
+        current_node=node
+        print("-"*depth+str(current_node.data))
+        if current_node.left:
+            self.display(current_node.left,depth+1)
+        if current_node.right:
+            self.display(current_node.right,depth+1)
+    def findMin(self,node):  
+        current_node=node
+        while current_node.left is not None:
+            current_node=current_node.left
+        return current_node
+    def findMax(self,node):
+        current_node=node
+        while current_node.right is not None:
+            current_node=current_node.right
+        return current_node
